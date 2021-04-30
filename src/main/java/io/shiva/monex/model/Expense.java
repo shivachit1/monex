@@ -1,7 +1,14 @@
 package io.shiva.monex.model;
 
-public class Expense {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
+@Entity
+public class Expense {
+    @Id
+    @GeneratedValue
+    private Long id;
     private String expenseType;
     private double expenseAmount;
     private String currency;
@@ -9,10 +16,19 @@ public class Expense {
     public Expense() {
     }
 
-    public Expense(String expenseType, double expenseAmount, String currency) {
+    public Expense(Long id, String expenseType, double expenseAmount, String currency) {
+        this.id = id;
         this.expenseType = expenseType;
         this.expenseAmount = expenseAmount;
         this.currency = currency;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getExpenseType() {

@@ -1,34 +1,41 @@
 package io.shiva.monex.controller;
 
+import io.shiva.monex.service.ExpenseService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
+import java.util.List;
+
 import io.shiva.monex.model.Expense;
 
 @RestController
 public class ExpenseController {
-    private final HashMap<Integer,Expense> expenseHashMap = new HashMap<>();
-    int i=0;
-    @GetMapping(path="/expenses",produces = "application/json")
-    public HashMap<Integer, Expense> getAllExpenses(){
-        return expenseHashMap;
+
+    private ExpenseService expenseService;
+
+    @Autowired
+    public ExpenseController(ExpenseService expenseService){
+        this.expenseService=expenseService;
     }
 
-    @PostMapping(path="/expenses",produces = "application/json")
+    @GetMapping(path="/expenses",produces = "application/json")
+    public List<Expense> getExpenses(){
+        return expenseService.getExpenses();
+    }
+
+    @PostMapping(path="/expenses")
     public Expense createExpense(@RequestBody Expense expense){
-        i++;
-        expenseHashMap.put(i,expense);
-        return expense;
+        return expenseService.createExpense(expense);
     }
 
     @PutMapping(path="/expenses/{id}",produces = "application/json")
-    public Expense updateExpense(@PathVariable("id") Integer id, @RequestBody Expense expense){
-        expenseHashMap.put(id,expense);
-        return expense;
+    public Expense updateExpense(@PathVariable("id") Long id, @RequestBody Expense expense){
+        return expenseService.updateExpense(id, expense);
     }
 
     @DeleteMapping(path="/expenses/{id}")
-    public String deleteExpense(@PathVariable("id") Integer id){
-        expenseHashMap.remove(id);
-        return "successfully deleted";
+    public void deleteExpense(@PathVariable("id") Long id){
+       expenseService.deleteExpense(id);
     }
 }

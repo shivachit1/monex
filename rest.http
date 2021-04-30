@@ -6,20 +6,20 @@ POST http://localhost:8080/expenses
 Content-Type: application/json
 
 {
-"expenseType":"travel",
+"expenseType":"Rent",
 "expenseAmount":500.0,
 "currency":"Euro"
 }
 
 ### Updating expense
-PUT http://localhost:8080/expenses/2
+PUT http://localhost:8080/expenses/3
 Content-Type: application/json
 
 {
-  "expenseType":"Car",
-  "expenseAmount":3002.0,
+  "expenseType":"Luxury2",
+  "expenseAmount":300.0,
   "currency":"Euro"
 }
 
 ### deleting expense
-DELETE http://localhost:8080/expenses/1
+DELETE http://localhost:8080/expenses/2

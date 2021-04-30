@@ -1,0 +1,25 @@
+### Getting all expenses
+GET http://localhost:8080/users
+
+### creating new expense
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "name":"test3",
+  "email":"test3@gmail.com",
+  "passwordHash":"hashPassword"
+}
+
+### Updating expense
+PUT http://localhost:8080/users/3
+Content-Type: application/json
+
+{
+  "name":"test1",
+  "email":"test1@gmail.com",
+  "passwordHash":"hashPassword"
+}
+
+### deleting expense
+DELETE http://localhost:8080/users/3

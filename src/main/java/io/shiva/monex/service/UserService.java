@@ -25,18 +25,17 @@ public class UserService {
     }
 
     public User createUser(User user){
-        Optional<User> user1= userRepository.findUsersByEmail(user.getEmail());
+        Optional<User> user1= userRepository.findUserByEmail(user.getEmail());
         if(user1.isPresent()) throw new IllegalStateException("User with email already exists");
         return userRepository.save(user);
     }
-
 
     @Transactional
     public User updateUser(Long id, User user){
         boolean exists = userRepository.existsById(id);
         if(!exists) throw new IllegalStateException("User not found");
 
-        Optional<User> optionalUser = userRepository.findUsersByEmail(user.getEmail());
+        Optional<User> optionalUser = userRepository.findUserByEmail(user.getEmail());
         if(!optionalUser.isPresent()) throw new IllegalStateException("Email Already Taken");
 
         Optional<User> user1=userRepository.findById(id);
